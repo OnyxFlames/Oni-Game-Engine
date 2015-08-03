@@ -21,7 +21,8 @@ build/
 bld/
 [Bb]in/
 [Oo]bj/
-
+# Copyrighted Test Textures
+resources/ignore/
 # Visual Studo 2015 cache/options directory
 .vs/
 
