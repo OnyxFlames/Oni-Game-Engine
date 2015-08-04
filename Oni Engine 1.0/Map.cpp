@@ -9,8 +9,9 @@ sf::Sprite Map::getSprite(){
 	return sprite;
 }
 void Map::init(std::string init){
-	collisionFile = init + "map.coll";
-
+	collisionFile = init + "/map.coll";
+	texture.loadFromFile(init + "/map.png");
+	sprite.setTexture(texture);
 }
 Map::~Map()
 {

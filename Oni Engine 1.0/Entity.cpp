@@ -42,6 +42,10 @@ Entity Entity::setPosition(sf::Vector2f loc)
 	return *this;
 }
 
+sf::Vector2f Entity::getLocation(){
+	return position;
+}
+
 Entity Entity::move(int enumDirection){
 
 	if (enumDirection == UP){
@@ -62,6 +66,7 @@ Entity Entity::move(int enumDirection){
 	}
 	return *this;
 }
+/* Deprecated */
 void Entity::loadTextures(std::initializer_list<std::string> lst){
 	for (auto str : lst){
 		texture.loadFromFile(str);
@@ -70,7 +75,11 @@ void Entity::loadTextures(std::initializer_list<std::string> lst){
 	sprite.setTexture(textureVec[0]);
 }
 
-void Entity::changeTexture(short textureIndex){
+void loadSpritesheet(std::string spritesheet, sf::Vector2i spriteDimensions){
+
+}
+
+void Entity::changeTexture(size_t textureIndex){
 	if (textureIndex > (textureVec.size() - 1))
 		exit(EXIT_FAILURE);
 	sprite.setTexture(textureVec[textureIndex]);

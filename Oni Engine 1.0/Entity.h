@@ -23,14 +23,17 @@ public:
 	~Entity				();
 
 	
-	Entity setSpeed		(float speedValue);
-	Entity setPosition	(float x, float y);
-	Entity setPosition	(sf::Vector2f loc);
-	Entity move			(int enumDirection);
+	Entity setSpeed			(float speedValue);
+	Entity setPosition		(float x, float y);
+	Entity setPosition		(sf::Vector2f loc);
+	Entity move				(int enumDirection);
+	sf::Vector2f getLocation();
+
 
 	sf::Sprite getSprite();
 	void loadTextures(std::initializer_list<std::string> lst);
-	void changeTexture(short textureIndex);
+	void loadSpritesheet(std::string spritesheet, sf::Vector2i spriteDimensions);
+	void changeTexture(size_t textureIndex);
 
 
 	enum direction {

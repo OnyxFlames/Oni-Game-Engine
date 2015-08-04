@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Entity.h"
+#include "Map.h"
 
 #define TITLE "ONI ENGINE DEMO"
 
@@ -27,7 +28,11 @@ int main(int argc, char** argv)
 	}
 
 	sf::RenderWindow window(sf::VideoMode(width, height), TITLE);
-	
+	sf::View view;
+	view.setSize(sf::Vector2f(400, 300));
+	view.setCenter((width/2), (height/2));
+	window.setView(view);
+	Map map("../resources/textures/");
 	Entity test;
 	test.loadTextures({
 		"../resources/textures/test-right.png",
@@ -39,6 +44,7 @@ int main(int argc, char** argv)
 	while (window.isOpen())
 	{
 		sf::Event event;
+		
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
@@ -77,8 +83,13 @@ int main(int argc, char** argv)
 				}
 			}
 		}
+		// Update view to the players location.
+		view.setCenter(test.getLocation().x, test.getLocation().y);
+		// Update the windows view to the newly changed view.
+		window.setView(view);
 
 		window.clear();
+		window.draw(map.getSprite());
 		window.draw(test.getSprite());
 		window.display();
 	}
