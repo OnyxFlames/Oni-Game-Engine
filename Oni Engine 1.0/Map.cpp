@@ -11,6 +11,7 @@ sf::Sprite Map::getSprite(){
 void Map::init(std::string init){
 	collisionFile = init + "/map.coll";
 	texture.loadFromFile(init + "/map.png");
+	texture.setRepeated(true);
 	sprite.setTexture(texture);
 }
 Map::~Map()

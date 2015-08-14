@@ -7,7 +7,7 @@ class Entity
 {
 
 private:
-	
+	size_t textureIndex = 0;
 	float speed = 16.0f;
 	sf::Sprite sprite;
 	sf::Texture texture;
@@ -32,9 +32,8 @@ public:
 
 	sf::Sprite getSprite();
 	void loadTextures(std::initializer_list<std::string> lst);
-	void loadSpritesheet(std::string spritesheet, sf::Vector2i spriteDimensions);
+	void loadSpritesheet(std::string spritesheet, sf::Vector2i spriteDimensions, sf::Vector2i startLocation = sf::Vector2i(0, 0));
 	void changeTexture(size_t textureIndex);
-
 
 	enum direction {
 
@@ -44,6 +43,5 @@ public:
 		LEFT	= 0x040,
 
 	};
-	
 };
 

@@ -1,5 +1,5 @@
 #include "Entity.h"
-
+#include <iostream>
 Entity::Entity(){
 
 
@@ -68,6 +68,7 @@ Entity Entity::move(int enumDirection){
 }
 /* Deprecated */
 void Entity::loadTextures(std::initializer_list<std::string> lst){
+	std::cerr << "ERROR: loadTextures(std::initializer_list<std::string> lst) is deprecated!\n";
 	for (auto str : lst){
 		texture.loadFromFile(str);
 		textureVec.push_back(texture);
@@ -75,12 +76,16 @@ void Entity::loadTextures(std::initializer_list<std::string> lst){
 	sprite.setTexture(textureVec[0]);
 }
 
-void loadSpritesheet(std::string spritesheet, sf::Vector2i spriteDimensions){
-
+void Entity::loadSpritesheet(std::string spritesheet, sf::Vector2i spriteDimensions, sf::Vector2i startLocation){
+	texture.loadFromFile(spritesheet);
+	sprite.setTexture(texture);
+	sprite.setTextureRect(sf::IntRect(startLocation, spriteDimensions));
 }
 
-void Entity::changeTexture(size_t textureIndex){
-	if (textureIndex > (textureVec.size() - 1))
+void Entity::changeTexture(size_t Index){
+	std::cerr << "ERROR: changeTexture(size_t Index) is deprecated!\n";
+	if (Index > (textureVec.size() - 1))
 		exit(EXIT_FAILURE);
+	textureIndex = Index;
 	sprite.setTexture(textureVec[textureIndex]);
 }
