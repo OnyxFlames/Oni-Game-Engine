@@ -49,20 +49,40 @@ sf::Vector2f Entity::getLocation(){
 Entity Entity::move(int enumDirection){
 
 	if (enumDirection == UP){
-		position.y -= speed;
-		sprite.setPosition(position);
+		if (direction == enumDirection){
+			position.y -= speed;
+			sprite.setPosition(position);
+		}
+		else {
+			changeDirection(enumDirection);
+		}
 	}
 	if (enumDirection == RIGHT){
-		position.x += speed;
-		sprite.setPosition(position);
+		if (direction == enumDirection){
+			position.x += speed;
+			sprite.setPosition(position);
+		}
+		else {
+			changeDirection(enumDirection);
+		}
 	}
 	if (enumDirection == DOWN){
-		position.y += speed;
-		sprite.setPosition(position);
+		if (direction == enumDirection){
+			position.y += speed;
+			sprite.setPosition(position);
+		}
+		else {
+			changeDirection(enumDirection);
+		}
 	}
 	if (enumDirection == LEFT){
-		position.x -= speed;
-		sprite.setPosition(position);
+		if (direction == enumDirection){
+			position.x -= speed;
+			sprite.setPosition(position);
+		}
+		else {
+			changeDirection(enumDirection);
+		}
 	}
 	return *this;
 }
@@ -77,9 +97,33 @@ void Entity::loadTextures(std::initializer_list<std::string> lst){
 }
 
 void Entity::loadSpritesheet(std::string spritesheet, sf::Vector2i spriteDimensions, sf::Vector2i startLocation){
+	spriteSize = spriteDimensions;
 	texture.loadFromFile(spritesheet);
 	sprite.setTexture(texture);
 	sprite.setTextureRect(sf::IntRect(startLocation, spriteDimensions));
+}
+
+void Entity::changeDirection(int newdirection){
+	int runningIndex = 0;
+	if (isMoving)
+		runningIndex = 16;
+
+	if (newdirection == DOWN){
+		sprite.setTextureRect(sf::IntRect(sf::Vector2i(runningIndex, 0), spriteSize));
+		direction = newdirection;
+	}
+	else if (newdirection == RIGHT){
+		sprite.setTextureRect(sf::IntRect(sf::Vector2i(runningIndex, 16), spriteSize));
+		direction = newdirection;
+	}
+	else if (newdirection == LEFT){
+		sprite.setTextureRect(sf::IntRect(sf::Vector2i(runningIndex, 32), spriteSize));
+		direction = newdirection;
+	}
+	else if (newdirection == UP){
+		sprite.setTextureRect(sf::IntRect(sf::Vector2i(runningIndex, 48), spriteSize));
+		direction = newdirection;
+	}
 }
 
 void Entity::changeTexture(size_t Index){
